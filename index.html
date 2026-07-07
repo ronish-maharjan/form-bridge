@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Cookie Auth Test (HTMX)</title>
+        <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+    </head>
+
+    <body>
+        <h1>Authentication Test (HTMX)</h1>
+
+        <!-- LOGIN -->
+        <form 
+                hx-post="http://localhost:3000/api/v1/auth/login"
+                hx-include="this"
+                hx-target="#display"
+                hx-swap="innerHTML"
+                >
+                <div>
+                    <label>Email</label><br />
+                    <input type="email" name="email" required />
+                </div>
+
+                <br />
+
+                <div>
+                    <label>Password</label><br />
+                    <input type="password" name="password" required />
+                </div>
+
+                <br />
+
+                <button type="submit">Login</button>
+        </form>
+
+        <hr />
+
+        <!-- GET USER -->
+        <button
+                hx-get="http://localhost:3000/api/v1/user/1"
+                hx-target="#display"
+                hx-swap="innerHTML"
+                >
+                Get User
+        </button>
+
+            <!-- LOGOUT -->
+            <button
+                    hx-post="http://localhost:3000/api/v1/auth/logout"
+                    hx-target="#display"
+                    hx-swap="innerHTML"
+                    >
+                    Logout
+            </button>
+
+                <hr />
+
+                <pre id="display">Response will appear here</pre>
+    </body>
+</html>

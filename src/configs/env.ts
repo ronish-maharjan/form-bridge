@@ -1,17 +1,20 @@
 import dotenv from "dotenv"
 import z from "zod";
+
 dotenv.config();
 
 const envSchema = z.object({
     CONNECTION_STRING:z.string().trim().min(8),
     PORT:z.coerce.number(),
-    JWT_SECRET_KEY:z.string().trim().min(8)
+    JWT_SECRET_KEY:z.string().trim().min(8),
+    RESEND_API_KEY:z.string().trim().min(32)
 })
 
 const envData = {
     CONNECTION_STRING:process.env.DATABASE_CONNECTION_URL,
     PORT:process.env.PORT,
-    JWT_SECRET_KEY:process.env.JWT_SECRET_KEY
+    JWT_SECRET_KEY:process.env.JWT_SECRET_KEY,
+    RESEND_API_KEY:process.env.RESEND_API_KEY
 }
 
 const parsedEnv = envSchema.safeParse(envData)

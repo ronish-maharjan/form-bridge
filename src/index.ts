@@ -1,10 +1,23 @@
 import express from "express";
-import {env} from "./configs/env.js";
-import { healthRouter } from "./routes/health.routes.js";
+import cors from "cors";
+import { env } from "./configs/env.js";
+import { router } from "./routes/index.js";
+import cookieParser from "cookie-parser";
 
-// creating the express app
 const app = express();
 
-app.use(healthRouter);
+const corsOptions = {
+  origin: "http://localhost:4000",
+  methods: ["GET", "POST"],
+  credentials:true,
+};
 
-app.listen(env.port,()=>{console.log("listening",env.port)})
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
+app.use("/api", router);
+
+app.listen(env.PORT, () => {
+  console.log("Listening on", env.PORT);
+});

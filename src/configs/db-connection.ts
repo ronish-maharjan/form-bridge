@@ -3,7 +3,7 @@ import { env } from "./env.js";
 
 
 const pool = new Pool({
-    connectionString:env.connectionString,
+    connectionString:env.CONNECTION_STRING,
 });
 
 export {pool};

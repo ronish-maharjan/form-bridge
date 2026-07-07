@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
       "module":"nodeNext",
+      "include":["src"],
       "moduleResolution":"nodeNext",
       "strict":true
   }
