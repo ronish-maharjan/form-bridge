@@ -7,7 +7,7 @@ class ZodErrorFormatter {
         const fieldError = Object.fromEntries(Object.entries(errorObject.fieldErrors).map(([field,messages])=>[field,messages[0]]));
         const formError = errorObject.formErrors;
         let formattedError = {fieldError,formError};
-        return formattedError;
+        return JSON.stringify(formattedError);
     }
 }
 
