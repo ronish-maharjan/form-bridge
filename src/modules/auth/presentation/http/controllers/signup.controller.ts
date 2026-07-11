@@ -14,7 +14,7 @@ class SignupController {
                 const password = req.body.password;
                 const result = await this.#signupUsecase.execute({email,password})
                 if(result.ok){
-                    return res.status(201).json({success:true})
+                    return res.sendStatus(201);
                 }
                 throw result.error;
             }catch(err){

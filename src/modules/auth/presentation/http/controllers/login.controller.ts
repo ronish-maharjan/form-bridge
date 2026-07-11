@@ -21,7 +21,7 @@ class LoginController {
             setCookie(res,"__secure-access-token",accessToken,1000 * 60 * 15);
             const refreshToken = JwtToken.createRefreshToken({id:result.data.id,email:result.data.email});
             setCookie(res,"__secure-refresh-token",refreshToken,1000 * 60 * 60 * 24 * 7);
-            return res.status(200).json({success:true, message:"Logged In"})
+            return res.sendStatus(204);
         }catch(err){
             next(err);
         }
