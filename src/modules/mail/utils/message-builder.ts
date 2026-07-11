@@ -5,8 +5,5 @@ class MessageBuilder {
         return html;
     }
 };
-
-const result = MessageBuilder.build({name:"ronish",message:"i want to work with you mate"});
-console.log(result);
 export {MessageBuilder}
 

@@ -1,23 +1,22 @@
 import { NextFunction, Request, Response } from "express";
 import { z } from "zod";
+import { ValidationError } from "../errors/validation.error.js";
 import { ZodErrorFormatter } from "../utils/zod-error-formatter.js";
 
 class ValidationGuard {
     private constructor() {}
     static validate(schema: z.ZodSchema) {
-        return (req: Request, res: Response, next: NextFunction) => {
+        return async (req: Request, res: Response, next: NextFunction) => {
             const parsedResult = schema.safeParse(req.body);
             if (!parsedResult.success) {
-                const errors = ZodErrorFormatter.format(parsedResult.error);
-                return res.status(400).json({
-                    success: false,
-                    errors,
-                });
+                return next(
+                    new ValidationError({ message: "Validation failed.", options: { context: { issues: ZodErrorFormatter.format(parsedResult.error) }}})
+                );
             }
 
-            next();
+            return next();
         };
     }
-}
 
+}
 export { ValidationGuard };

@@ -1,60 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <title>Cookie Auth Test (HTMX)</title>
-        <script src="https://unpkg.com/htmx.org@1.9.12"></script>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MailBridge Test</title>
+</head>
+<body>
 
-    <body>
-        <h1>Authentication Test (HTMX)</h1>
+    <h2>Login</h2>
 
-        <!-- LOGIN -->
-        <form 
-                hx-post="http://localhost:3000/api/v1/auth/login"
-                hx-include="this"
-                hx-target="#display"
-                hx-swap="innerHTML"
-                >
-                <div>
-                    <label>Email</label><br />
-                    <input type="email" name="email" required />
-                </div>
+    <form id="login-form">
+        <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            required
+        />
 
-                <br />
+        <br><br>
 
-                <div>
-                    <label>Password</label><br />
-                    <input type="password" name="password" required />
-                </div>
+        <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            required
+        />
 
-                <br />
+        <br><br>
 
-                <button type="submit">Login</button>
-        </form>
-
-        <hr />
-
-        <!-- GET USER -->
-        <button
-                hx-get="http://localhost:3000/api/v1/user/1"
-                hx-target="#display"
-                hx-swap="innerHTML"
-                >
-                Get User
+        <button type="submit">
+            Login
         </button>
+    </form>
 
-            <!-- LOGOUT -->
-            <button
-                    hx-post="http://localhost:3000/api/v1/auth/logout"
-                    hx-target="#display"
-                    hx-swap="innerHTML"
-                    >
-                    Logout
-            </button>
+    <hr>
 
-                <hr />
+    <h2>Protected Request</h2>
 
-                <pre id="display">Response will appear here</pre>
-    </body>
+    <button id="getApis">
+        GET /api/v1/apis
+    </button>
+
+    <hr>
+
+    <h3>Response</h3>
+
+    <pre id="result"></pre>
+
+    <script>
+        const result = document.getElementById("result");
+
+        // Login
+        document
+            .getElementById("login-form")
+            .addEventListener("submit", async (e) => {
+                e.preventDefault();
+
+                const form = new FormData(e.target);
+
+                const body = {
+                    email: form.get("email"),
+                    password: form.get("password"),
+                };
+
+                try {
+                    const response = await fetch(
+                        "http://localhost:3000/api/v1/auth/login",
+                        {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            credentials: "include",
+                            body: JSON.stringify(body),
+                        }
+                    );
+
+                    const data = await response.json();
+
+                    result.textContent =
+                        "LOGIN\n\n" +
+                        JSON.stringify(data, null, 2);
+
+                } catch (err) {
+                    console.error(err);
+                }
+            });
+
+        // Protected GET
+        document
+            .getElementById("getApis")
+            .addEventListener("click", async () => {
+
+                try {
+                    const response = await fetch(
+                        "http://localhost:3000/api/v1/apis",
+                        {
+                            method: "GET",
+                            credentials: "include",
+                        }
+                    );
+
+                    const data = await response.json();
+
+                    result.textContent =
+                        "GET /api/v1/apis\n\n" +
+                        JSON.stringify(data, null, 2);
+
+                } catch (err) {
+                    console.error(err);
+                }
+            });
+    </script>
+
+</body>
 </html>

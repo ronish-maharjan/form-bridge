@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mail Test</title>
+</head>
+<body>
+    <h2>Send Mail</h2>
+
+    <form id="mail-form">
+        <div>
+            <label>Name</label><br>
+            <input
+                type="text"
+                name="name"
+                placeholder="John Doe"
+                required
+            />
+        </div>
+
+        <br>
+
+        <br>
+
+        <div>
+            <label>Message</label><br>
+            <textarea
+                name="message"
+                rows="5"
+                cols="40"
+                placeholder="Hello..."
+                required
+            ></textarea>
+        </div>
+
+        <br>
+
+        <button type="submit">Send</button>
+    </form>
+
+    <pre id="result"></pre>
+
+    <script>
+        const form = document.getElementById("mail-form");
+        const result = document.getElementById("result");
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+
+            const body = {
+                name: formData.get("name"),
+                email: formData.get("email"),
+                message: formData.get("message"),
+            };
+
+            try {
+                const response = await fetch(
+                    "http://localhost:3000/api/v1/mail?api_key=mb_874cbd45dbf81587cbc0bad6c03598e673b7e89386a85a4e63d8c36ea728ab8c",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(body),
+                    }
+                );
+
+                const data = await response.json();
+
+                result.textContent = JSON.stringify(data, null, 2);
+            } catch (err) {
+                console.error(err);
+            }
+        });
+    </script>
+</body>
+</html>

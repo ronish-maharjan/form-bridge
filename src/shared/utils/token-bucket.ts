@@ -1,3 +1,5 @@
+import { RateLimitExceededError } from "../errors/rate-limit-exceeded.error.js";
+
 type Bucket = {total_tokens:number,last_updated:number}
 class TokenBucket {
     readonly #bucketSize:number;
@@ -21,7 +23,7 @@ class TokenBucket {
         const newTokens = Math.floor((currentTime - lastUpdated) * this.#fillRate);
         totalTokens = Math.min(this.#bucketSize,totalTokens + newTokens);
         if(totalTokens < 1){
-            throw new Error("Too many request")
+            throw new RateLimitExceededError();
         }
         totalTokens -= 1;
         return {total_tokens:totalTokens,last_updated:currentTime};

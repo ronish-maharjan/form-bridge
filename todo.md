@@ -8,8 +8,12 @@
     - [x] implement edit user details email, inboxmail 
 
 - todo 
+    - [] create proper entity with value object 
     - [] proper types for result, response everything 
-    - [] implement change passwordcanthat 
+    - [] implement change password functionality
+    - [] add proper error custom code handler for db errors
+    - [] may add like usecase return result type 
+    - [] create datacorruption error 
 
 - learn_later
     - [] learn how env injection work in node

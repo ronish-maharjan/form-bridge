@@ -1,16 +1,22 @@
 import { Router } from "express";
-import { healthRouter } from "../../modules/health/routes/index.js";
-import { authRouter } from "../../modules/auth/routes/index.js";
-import { userRouter } from "../../modules/user/routes/index.js";
-import { apisRouter } from "../../modules/apis/routes/index.js";
-import { mailRouter } from "../../modules/mail/routes/index.js";
+import cors from "cors";
+import { privateRouter } from "./private.routes.js";
+import { publicRouter } from "./public.routes.js";
 
 const v1Router = Router();
 
-v1Router.use(healthRouter);
-v1Router.use(authRouter);
-v1Router.use(userRouter);
-v1Router.use(apisRouter);
-v1Router.use(mailRouter);
+const publicCors = cors({
+    origin: true,
+    methods:["GET","POST"]
+});
 
-export {v1Router};
+const privateCors = cors({
+    origin: "http://localhost:8000",
+    credentials: true
+});
+
+
+v1Router.use(publicCors, publicRouter);
+v1Router.use(privateCors, privateRouter);
+
+export { v1Router }
