@@ -1,6 +1,7 @@
 import { Request ,Response,NextFunction} from "express";
 import { redis } from "../../configs/redis-connection.js";
 import { TokenBucket } from "../utils/token-bucket.js";
+import { logger } from "../logger/logger.js";
 
 const rateLimiter = ({bucketSize,fillRate,policy}:{bucketSize:number,fillRate:number,policy:string})=>{
     const tokenBucket = new TokenBucket({bucketSize,fillRate});
@@ -14,7 +15,7 @@ const rateLimiter = ({bucketSize,fillRate,policy}:{bucketSize:number,fillRate:nu
                 await redis.set(`user:${ip}:${policy}`,bucket);
             }else{
                 const userBucket = isExist;
-                console.log(userBucket)
+                logger.debug(userBucket);
                 const updatedBucket = JSON.stringify(tokenBucket.update(JSON.parse(userBucket)));
                 await redis.set(`user:${ip}:${policy}`,updatedBucket);
             }
