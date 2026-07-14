@@ -1,0 +1,11 @@
+tooManyRequestErrorResponse:
+  allOf: 
+    - $ref: "./baseErrorResponse.yml#/baseErrorResponse"
+    - type: object
+      properties: 
+        code: 
+          type: string
+          example: TOO_MANY_REQUESTS
+        message: 
+          type: string
+          example: Too many requests.

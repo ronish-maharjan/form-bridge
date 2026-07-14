@@ -1,0 +1,11 @@
+badRequestErrorResponse:
+  allOf: 
+    - $ref: "./baseErrorResponse.yml#/baseErrorResponse"
+    - type: object
+      properties: 
+        code: 
+          type: string
+          example: BAD_REQUEST 
+        message: 
+          type: string
+          example: Invalid json format.

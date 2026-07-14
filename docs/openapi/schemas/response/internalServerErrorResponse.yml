@@ -1,0 +1,11 @@
+internalServerErrorResponse: 
+  allOf: 
+    - $ref: "./baseErrorResponse.yml#/baseErrorResponse"
+    - type: object
+      properties: 
+        code: 
+          type: string
+          example: INTERNAL_SERVER_ERROR
+        message: 
+          type: string
+          example: Something went wrong.

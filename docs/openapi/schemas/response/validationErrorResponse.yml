@@ -1,0 +1,22 @@
+syntaxErrorResponse:
+  $ref: "./baseErrorResponse.yml#/baseErrorResponse"
+
+validationErrorResponse:
+  allOf:
+    - $ref: "./validationErrorResponse.yml#/syntaxErrorResponse"
+    - type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            required:
+              - field
+              - message
+            properties:
+              field:
+                type: string
+                example: email
+              message:
+                type: string
+                example: Email must be gmail only

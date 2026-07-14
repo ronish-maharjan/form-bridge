@@ -1,0 +1,11 @@
+conflictErrorResponse:
+  allOf: 
+    - $ref: "./baseErrorResponse.yml#/baseErrorResponse"
+    - type: object
+      properties: 
+        code: 
+          type: string
+          example: USER_ALREADY_EXISTS 
+        message: 
+          type: string
+          example: User already exists.

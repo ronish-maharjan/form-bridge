@@ -1,0 +1,16 @@
+baseErrorResponse:
+  type: object
+  properties: 
+    success:
+      type: boolean
+      example: false
+    message: 
+      type: string
+      example: Email validation failed
+    code: 
+      type: string
+      example: VALIDATON_FAILED
+  required: 
+    - success
+    - message
+    - code

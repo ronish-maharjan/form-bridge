@@ -1,0 +1,19 @@
+openapi: 3.0.4
+
+info: 
+  title: Form Bridge
+  description: Simple backend service for static form.
+
+servers: 
+  - url: http://localhost:3000/api/v1
+    description: Testing server
+
+tags:
+  - name: Auth 
+    description: Related to authentication
+
+paths: 
+
+  # For the signup api
+  /auth/signup:
+    $ref: "./paths/auth.yml#/signup"

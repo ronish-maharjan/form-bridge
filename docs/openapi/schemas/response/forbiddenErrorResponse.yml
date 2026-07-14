@@ -1,0 +1,12 @@
+forbiddenErrorResponse: 
+  allOf: 
+    - $ref: "./baseErrorResponse.yml#/baseErrorResponse"
+    - type: object
+      properties: 
+        code: 
+          type: string
+          example: FORBIDDEN
+        message: 
+          type: string
+          example: You are already authenticated.
+
