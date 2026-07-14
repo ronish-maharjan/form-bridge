@@ -2,7 +2,7 @@ import { AppError, AppErrorInput, ErrorCodeType, OperationalErrorCode } from "./
 
 class ValidationError extends AppError{
     readonly isOperational: boolean = true;
-    readonly code:ErrorCodeType = OperationalErrorCode.VALIDATION_ERROR
+    readonly code:ErrorCodeType = OperationalErrorCode.VALIDATION_FAILED
 
     constructor(input:AppErrorInput){
         super(input);

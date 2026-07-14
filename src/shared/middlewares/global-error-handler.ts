@@ -3,6 +3,14 @@ import { AppError, NonOperationalErrorCode, NonOperationalErrorCodeType, Operati
 import { logger } from "../logger/logger.js";
 
 export const globalErrorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
+    if (err instanceof SyntaxError && "body" in err) {
+        return res.status(400).json({
+            success: false,
+            code: "BAD_REQUEST",
+            message: "Request body contains invalid JSON."
+        });
+    }
+
     if(err instanceof AppError){
 
         if(err.isOperational){
@@ -14,24 +22,24 @@ export const globalErrorHandler: ErrorRequestHandler = (err, _req, res, _next) =
                     return res.status(429).json({success:false,code:err.code,message:err.message});
                 break;
 
-                case "FORBIDDEN_ERROR":
+                case "FORBIDDEN":
                     return res.status(403).json({success:false,code:err.code,message:err.message});
                 break
 
-                case "VALIDATION_ERROR":
+                case "VALIDATION_FAILED":
                     return res.status(400).json({success:false, code:err.code, message:err.message,errors:err.context?.issues});
                 break;
 
                 case "INVALID_CREDENTIALS":
-                    return res.status(429).json({success:false,code:err.code,message:err.message});
+                    return res.status(401).json({success:false,code:err.code,message:err.message});
                 break;
 
-                case "CONFLICT_ERROR":
+                case "CONFLICT":
                     return res.status(409).json({success:false,code:err.code,message:err.message});
                 break
 
                 case "RESOURCE_ALREADY_EXISTS":
-                    return res.status(409).json({success:false,message:err.message,error:err});
+                    return res.status(409).json({success:false,code:err.code,message:err.message});
                 break;
 
                 case "RESOURCE_NOT_FOUND":
@@ -42,10 +50,13 @@ export const globalErrorHandler: ErrorRequestHandler = (err, _req, res, _next) =
                     return res.status(401).json({success:false,code:err.code,message:err.message});
                 break;
 
+                case "BAD_REQUEST":
+                    return res.status(400).json({success:false, code:err.code, message:err.message})
+
                 default:
                     const _error:never = errorCode;
-                    return res.status(500).json({success:false,code:NonOperationalErrorCode.INTERNAL_SERVER_ERROR,message:"Internal server error."});
-                    
+                return res.status(500).json({success:false,code:NonOperationalErrorCode.INTERNAL_SERVER_ERROR,message:"Internal server error."});
+
             }
 
         }else{
@@ -53,16 +64,16 @@ export const globalErrorHandler: ErrorRequestHandler = (err, _req, res, _next) =
             switch(errorCode){
                 case "EXTERNAL_SERVICE_ERROR":
                     logger.error(err);
-                    return res.status(503).json({success:false,code:err.code,message:"Service temporarily unavailable."})
+                return res.status(503).json({success:false,code:err.code,message:"Service temporarily unavailable."})
 
                 break
             }
         }
 
-    // for non operationals as well as unexpected errrors
+        // for non operationals as well as unexpected errrors
     }else{
         logger.fatal(err)
         return res.status(500).json({success:false,code:NonOperationalErrorCode.INTERNAL_SERVER_ERROR,message:"Internal server error."});
     }
 }
-        
+
