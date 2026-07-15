@@ -2,7 +2,7 @@ signup:
   post:
     tags:
       - Auth
-
+    summary: create new account in the platform 
     requestBody:
       required: true
       content:
@@ -21,6 +21,9 @@ signup:
               - password
 
     responses:
+      "201": 
+        description: User created successfully
+
       "400":
         description: Bad Request
         content: 
@@ -57,3 +60,96 @@ signup:
             schema: 
               $ref: "../schemas/response/internalServerErrorResponse.yml#/internalServerErrorResponse"
 
+
+
+
+  # for login 
+login: 
+  post: 
+      tags: 
+        - Auth
+      summary: Login to the platform
+  
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: tester@gmail.com
+                password:
+                  type: string
+                  example: Test@123
+              required:
+                - email
+                - password
+  
+      responses:
+        "204":
+          description: Logged in successfully
+        "400":
+          description: Bad Request
+          content: 
+            application/json: 
+              schema: 
+                oneOf: 
+                  - $ref: "../schemas/response/validationErrorResponse.yml#/validationErrorResponse"
+                  - $ref: "../schemas/response/badRequestErrorResponse.yml#/badRequestErrorResponse"
+        "401":
+          description: Unauthorized
+          content:
+            application/json: 
+              schemas: 
+                $ref: "../schemas/response/unauthorizedErrorResponse.yml"
+
+        "403":
+          description: Forbidden 
+          content: 
+            application/json: 
+              schema: 
+                $ref: "../schemas/response/forbiddenErrorResponse.yml#/forbiddenErrorResponse" 
+  
+        "409": 
+          description: Conflict occured 
+          content: 
+            application/json: 
+              schema: 
+                $ref: "../schemas/response/conflictErrorResponse.yml#/conflictErrorResponse"
+  
+        "429": 
+          description: Too many request
+          content: 
+            application/json: 
+              schema: 
+                $ref: "../schemas/response/tooManyRequestErrorResponse.yml#/tooManyRequestErrorResponse"
+  
+        "500": 
+          description: Internal server errror
+          content: 
+            application/json: 
+              schema: 
+                $ref: "../schemas/response/internalServerErrorResponse.yml#/internalServerErrorResponse"
+ 
+logout: 
+    post: 
+      summary: Logout 
+      tags: 
+        - Auth
+      responses: 
+        "204":
+          description: Logout successfully
+        "401":
+            description: Not authorized
+            content:
+              application/json: 
+                schema: 
+                  $ref: "../schemas/response/unauthorizedErrorResponse.yml#/unauthorizedErrorResponse"
+        "500": 
+          description: Internal server error
+          content: 
+            application/json: 
+              schema: 
+                $ref: "../schemas/response/internalServerErrorResponse.yml#/internalServerErrorResponse"

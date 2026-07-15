@@ -1,0 +1,11 @@
+unauthorizedErrorResponse:
+  allOf: 
+    - $ref: "./baseErrorResponse.yml#/baseErrorResponse"
+    - type: object
+      properties: 
+        code: 
+          type: string
+          example: UNAUTHORIZED 
+        message: 
+          type: string
+          example: Unauthorized request.

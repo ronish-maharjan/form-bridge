@@ -14,6 +14,15 @@ tags:
 
 paths: 
 
+# Authentication 
   # For the signup api
   /auth/signup:
     $ref: "./paths/auth.yml#/signup"
+  # for login 
+  /auth/login:
+    $ref: "./paths/auth.yml#/login"
+
+  # for logout
+  /auth/logout:
+    $ref: "../openapi/paths/auth.yml#/logout"
+    
