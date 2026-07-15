@@ -16,7 +16,7 @@ class RefreshTokenUsecase {
                 id: string;
                 email: string;
             };
-            const newAccessToken = JwtToken.createRefreshToken({id:payload.id,email:payload.email});
+            const newAccessToken = JwtToken.createAccessToken({id:payload.id,email:payload.email});
             const newRefreshToken = JwtToken.createRefreshToken({id:payload.id,email:payload.email});
             return ok({accessToken:newAccessToken,refreshToken:newRefreshToken});
 
