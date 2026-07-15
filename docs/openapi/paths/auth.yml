@@ -102,8 +102,8 @@ login:
           description: Unauthorized
           content:
             application/json: 
-              schemas: 
-                $ref: "../schemas/response/unauthorizedErrorResponse.yml"
+              schema: 
+                $ref: "../schemas/response/unauthorizedErrorResponse.yml#/unauthorizedErrorResponse"
 
         "403":
           description: Forbidden 
@@ -142,11 +142,11 @@ logout:
         "204":
           description: Logout successfully
         "401":
-            description: Not authorized
-            content:
-              application/json: 
-                schema: 
-                  $ref: "../schemas/response/unauthorizedErrorResponse.yml#/unauthorizedErrorResponse"
+           description: Not authorized
+           content:
+             application/json: 
+               schema: 
+                 $ref: "../schemas/response/unauthorizedErrorResponse.yml#/unauthorizedErrorResponse"
         "429": 
           description: Too many request
           content: 

@@ -1,6 +1,7 @@
 openapi: 3.0.4
 
 info: 
+  version: 1.0.0
   title: Form Bridge
   description: Simple backend service for static form.
 
@@ -11,6 +12,8 @@ servers:
 tags:
   - name: Auth 
     description: Related to authentication
+  - name: User
+    description: Related to user
 
 paths: 
 
@@ -24,5 +27,10 @@ paths:
 
   # for logout
   /auth/logout:
-    $ref: "../openapi/paths/auth.yml#/logout"
+    $ref: "./paths/auth.yml#/logout"
     
+
+
+# For user routes
+  /user/me:
+    $ref: "./paths/user.yml#/info"

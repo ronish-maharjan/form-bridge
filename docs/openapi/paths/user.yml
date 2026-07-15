@@ -1,0 +1,56 @@
+info: 
+  get: 
+    summary: Get user detail
+    tags: 
+      - User
+
+    responses: 
+      "200": 
+        description: User info found returning it
+        content: 
+          application/json: 
+            schema: 
+              type: object
+              properties: 
+                id:
+                  type: string;
+                  example: be1e228c-4dae-442c-8321-4a5bc69b586f
+                email:
+                  type: string;
+                  example: tester@gmail.com
+                inboxMail: 
+                  type: string; 
+                  example: inboxmail@gmail.com
+                createdAt:
+                  type: string
+                  format: date-time
+                  example: 2026-07-14 14:17:17.372993
+                updatedAt: 
+                  type: string
+                  format: date-time
+                  example: 2026-08-14 14:17:17.372993
+              required: 
+                - id
+                - email
+                - inboxMail
+                - createdAt
+                - updatedAt
+      "401": 
+         description: Not Authenticated
+         content:
+           application/json: 
+             schema:
+               $ref: "../schemas/response/unauthorizedErrorResponse.yml#/unauthorizedErrorResponse"
+
+      "429": 
+         description: Too many request
+         content: 
+           application/json: 
+             schema: 
+               $ref: "../schemas/response/tooManyRequestErrorResponse.yml#/tooManyRequestErrorResponse"
+      "500": 
+         description: Internal server error
+         content: 
+           application/json: 
+             schema: 
+               $ref: "../schemas/response/internalServerErrorResponse.yml#/internalServerErrorResponse"
