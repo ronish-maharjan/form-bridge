@@ -8,7 +8,7 @@ class GetUserController {
     }
     public handle = async(req:Request,res:Response,next:NextFunction)=>{
         try {
-            const id = req.user.id;
+            const id = req.user?.id;
 
             const result = await this.#getUserUsecase.execute({id}); 
             if(!result.ok){
