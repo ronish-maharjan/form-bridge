@@ -147,6 +147,12 @@ logout:
               application/json: 
                 schema: 
                   $ref: "../schemas/response/unauthorizedErrorResponse.yml#/unauthorizedErrorResponse"
+        "429": 
+          description: Too many request
+          content: 
+            application/json: 
+              schema: 
+                $ref: "../schemas/response/tooManyRequestErrorResponse.yml#/tooManyRequestErrorResponse"
         "500": 
           description: Internal server error
           content: 
