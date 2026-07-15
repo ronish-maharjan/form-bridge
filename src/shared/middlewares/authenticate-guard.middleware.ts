@@ -4,7 +4,7 @@ import { AuthenticationError } from "../errors/authentication.error.js";
 
 const authenticateGuard = async (req:Request,res:Response,next:NextFunction)=>{
     const cookie = req.cookies; 
-    const authToken = cookie["__secure-access-token"];
+    const authToken = cookie["__Secure-access-token"];
     if(!authToken){
         return next(new AuthenticationError({message:"Authentication failed."}))
     }else{
@@ -13,7 +13,7 @@ const authenticateGuard = async (req:Request,res:Response,next:NextFunction)=>{
             req.user = {id,email};
             next();
         }catch(err){
-            res.clearCookie("__secure-access-token");
+            res.clearCookie("__Secure-access-token");
             return next(new AuthenticationError({message:"Authentication failed."}))
         }
     }

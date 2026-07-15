@@ -18,9 +18,9 @@ class LoginController {
                 throw result.error;
             }
             const accessToken = JwtToken.createAccessToken({id:result.data.id,email:result.data.email});
-            setCookie(res,"__secure-access-token",accessToken,1000 * 60 * 15);
+            setCookie(res,"__Secure-access-token",accessToken,1000 * 60 * 15);
             const refreshToken = JwtToken.createRefreshToken({id:result.data.id,email:result.data.email});
-            setCookie(res,"__secure-refresh-token",refreshToken,1000 * 60 * 60 * 24 * 7);
+            setCookie(res,"__Secure-refresh-token",refreshToken,1000 * 60 * 60 * 24 * 7);
             return res.sendStatus(204);
         }catch(err){
             next(err);

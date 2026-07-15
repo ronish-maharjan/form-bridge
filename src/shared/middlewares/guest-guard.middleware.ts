@@ -3,8 +3,8 @@ import { JwtToken } from "../utils/jwt-token.js";
 import { ConflictError } from "../errors/conflict.error.js";
 
 const guestGuard = ( req: Request, res: Response, next: NextFunction) => {
-  const accessToken = req.cookies["__secure-access-token"];
-  const refreshToken = req.cookies["__secure-refresh-token"];
+  const accessToken = req.cookies["__Secure-access-token"];
+  const refreshToken = req.cookies["__Secure-refresh-token"];
 
   if (!accessToken) {
     return next();
@@ -21,7 +21,9 @@ const guestGuard = ( req: Request, res: Response, next: NextFunction) => {
     );
   } catch {
     // Token is invalid or expired, treat user as a guest.
-    return next();
+    res.clearCookie("__Secure-access-token");
+    res.clearCookie("__Secure-refresh-token");
+    next();
   }
 };
 
