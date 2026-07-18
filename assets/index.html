@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>MailBridge</title>
+
+        <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+    body {
+        background: #fff;
+        color: #111;
+        font-family: Inter, system-ui, sans-serif;
+        line-height: 1.6;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 80px 24px;
+    }
+
+    h1 {
+        font-size: 3rem;
+        margin-bottom: .5rem;
+    }
+
+    .subtitle {
+        color: #666;
+        font-size: 1.1rem;
+        max-width: 650px;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 12px;
+        margin-top: 32px;
+    }
+
+    a.button {
+        text-decoration: none;
+        border: 1px solid #111;
+        color: #111;
+        padding: 12px 18px;
+        border-radius: 8px;
+        transition: .2s;
+    }
+
+    a.button:hover {
+        background: #111;
+        color: white;
+    }
+
+    section {
+        margin-top: 90px;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+    }
+
+    pre {
+        background: #111;
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        overflow-x: auto;
+        margin-top: 16px;
+    }
+
+    code {
+        font-family: monospace;
+        font-size: .9rem;
+    }
+
+    .card {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 18px;
+    }
+
+    .flow {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-top: 30px;
+    }
+
+    .step {
+        flex: 1;
+        min-width: 180px;
+        border: 1px solid #ddd;
+        padding: 18px;
+        border-radius: 10px;
+    }
+
+    footer {
+        margin-top: 100px;
+        color: #777;
+        font-size: .9rem;
+        border-top: 1px solid #eee;
+        padding-top: 30px;
+    }
+        </style>
+    </head>
+
+    <body>
+
+        <div class="container">
+
+            <h1>MailBridge</h1>
+
+            <p class="subtitle">
+            Receive submissions from any static HTML form without writing backend code.
+            Generate an API key, add it to your form action and we'll deliver the submission to your inbox.
+            </p>
+
+            <div class="buttons">
+                <a class="button" href="/docs">API Documentation</a>
+                <!-- may be in future i will create frontend for this as dashboard for user to manage api-->
+                <!--<a class="button" href="/dashboard">Dashboard</a>-->
+            </div>
+
+            <section>
+
+                <h2>How it works</h2>
+
+                <div class="flow">
+
+                    <div class="step">
+                        <strong>1.</strong><br><br>
+                        Generate an API Key.
+                    </div>
+
+                    <div class="step">
+                        <strong>2.</strong><br><br>
+                        Add it to your form action.
+                    </div>
+
+                    <div class="step">
+                        <strong>3.</strong><br><br>
+                        Receive every submission in your inbox.
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section>
+
+                <h2>Example</h2>
+
+                <pre><code>&lt;form
+  action="https://api.example.com/sendMail?api_key=YOUR_API_KEY"
+  method="POST"&gt;
+
+  &lt;input name="name" /&gt;
+  &lt;input name="email" /&gt;
+  &lt;textarea name="message"&gt;&lt;/textarea&gt;
+
+  &lt;button&gt;Send&lt;/button&gt;
+
+&lt;/form&gt;
+                </code></pre>
+
+            </section>
+
+            <section>
+
+                <footer>
+
+                    MailBridge • Backend Form Service
+
+                </footer>
+
+        </div>
+
+    </body>
+</html>
+
