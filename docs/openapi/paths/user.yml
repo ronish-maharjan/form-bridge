@@ -54,3 +54,104 @@ info:
            application/json: 
              schema: 
                $ref: "../schemas/response/internalServerErrorResponse.yml#/internalServerErrorResponse"
+changeEmail: 
+  patch: 
+    summary: Change user email
+    tags:
+      - User
+    requestBody: 
+      required: true
+      content: 
+        application/json:
+          schema: 
+            properties: 
+              email:
+                type: string
+                example: tester@gmail.com
+            required: 
+              - email
+    responses: 
+      "204": 
+        description: Successfully changed email address
+      "400":
+        description: Bad Request
+        content: 
+          application/json: 
+            schema: 
+              oneOf: 
+                - $ref: "../schemas/response/validationErrorResponse.yml#/validationErrorResponse"
+                - $ref: "../schemas/response/badRequestErrorResponse.yml#/badRequestErrorResponse"
+      "401": 
+        description: Unauthorized
+        content: 
+          application/json: 
+            schema: 
+              $ref: "../schemas/response/unauthorizedErrorResponse.yml#/unauthorizedErrorResponse"
+
+changePassword: 
+  patch: 
+    summary: Change user password
+    tags:
+      - User
+    requestBody: 
+      required: true
+      content: 
+        application/json:
+          schema: 
+            properties: 
+              password:
+                type: string
+                example: Password@123
+            required: 
+              - password
+    responses: 
+      "204": 
+        description: Successfully changed email address
+      "400":
+        description: Bad Request
+        content: 
+          application/json: 
+            schema: 
+              oneOf: 
+                - $ref: "../schemas/response/validationErrorResponse.yml#/validationErrorResponse"
+                - $ref: "../schemas/response/badRequestErrorResponse.yml#/badRequestErrorResponse"
+      "401": 
+        description: Unauthorized
+        content: 
+          application/json: 
+            schema: 
+              $ref: "../schemas/response/unauthorizedErrorResponse.yml#/unauthorizedErrorResponse"
+
+changeInboxMail: 
+  patch: 
+    summary: Change user inbox mail address
+    tags:
+      - User
+    requestBody: 
+      required: true
+      content: 
+        application/json:
+          schema: 
+            properties: 
+              inboxMail:
+                type: string
+                example: inboxmail@gmail.com
+            required: 
+              - inboxMail
+    responses: 
+      "204": 
+        description: Successfully changed email address
+      "400":
+        description: Bad Request
+        content: 
+          application/json: 
+            schema: 
+              oneOf: 
+                - $ref: "../schemas/response/validationErrorResponse.yml#/validationErrorResponse"
+                - $ref: "../schemas/response/badRequestErrorResponse.yml#/badRequestErrorResponse"
+      "401": 
+        description: Unauthorized
+        content: 
+          application/json: 
+            schema: 
+              $ref: "../schemas/response/unauthorizedErrorResponse.yml#/unauthorizedErrorResponse"
