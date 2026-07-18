@@ -1,4 +1,4 @@
-# FormBridge
+j# FormBridge
 
 A simple backend service for HTML forms.
 
@@ -51,9 +51,7 @@ FormBridge accepts any form fields and forwards the submission to the email addr
 
 Interactive API documentation is available at:
 
-```
-(Api Documentation)[https://formbridge.ronishmaharjan.info.np]
-```
+[API Documentation](https://formbridge.ronishmaharjan.info.np)
 
 ## Tech Stack
 
