@@ -14,7 +14,10 @@ tags:
     description: Related to authentication
   - name: User
     description: Related to user
-
+  - name: Public
+    description: Publically callable routes cors *
+  - name: ApiKey
+    description: Related to Apikey manipulation
 paths: 
 
 # Authentication 
@@ -28,9 +31,53 @@ paths:
   # for logout
   /auth/logout:
     $ref: "./paths/auth.yml#/logout"
-    
+
+  # for refresh token
+  /auth/refresh:
+    $ref: "./paths/auth.yml#/refreshToken"
 
 
 # For user routes
+  # Get user info
   /user/me:
     $ref: "./paths/user.yml#/info"
+
+  # edit user properties
+
+  #edit user email
+  /user/me/email: 
+    $ref: "./paths/user.yml#/changeEmail"
+
+  #edit user password
+  /user/me/password: 
+    $ref: "./paths/user.yml#/changePassword"
+    
+
+  #edit user inboxmail address
+  /user/me/inbox-mail: 
+    $ref: "./paths/user.yml#/changeInboxMail"
+    
+
+  # Apikey Routes
+  #Get apikeys
+  /apis:
+    get:
+      $ref: "./paths/apiKeys.yml#/getApiKeys/get"
+    post:
+      $ref: "./paths/apiKeys.yml#/createApiKey/post"
+  /apis/{id}: 
+    delete: 
+      $ref: "./paths/apiKeys.yml#/deleteApiKey/delete"
+  
+  # create apikeys
+
+  # Mail routes
+  /public/mail:
+    $ref : "./paths/public.yml#/sendMail"
+
+  # Health routes
+  /public/health:
+    $ref: "./paths/public.yml#/applicationHealth"
+
+  /public/health/ready:
+    $ref: "./paths/public.yml#/dbHealth"
