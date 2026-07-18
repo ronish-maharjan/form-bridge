@@ -1,0 +1,90 @@
+sendMail:
+  post:
+    summary: Send mail from static form
+    tags:
+      - Public
+
+    parameters:
+      - name: api_Key
+        in: query
+        required: true
+        schema:
+          type: string
+        description: API key used to authenticate the request
+        example: abc123
+
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            minProperties: 1
+            additionalProperties: true
+
+    responses:
+      "204":
+        description: Send message
+      "500": 
+        description: Internal server errror
+        content: 
+          application/json: 
+            schema: 
+              $ref: "../schemas/response/internalServerErrorResponse.yml#/internalServerErrorResponse"
+
+applicationHealth: 
+  get: 
+    tags: 
+      - Public
+    summary: Get applicatin health
+    responses: 
+      "200": 
+        description: Application running.
+        content: 
+          application/json: 
+            schema: 
+              type: object
+              properties: 
+                success:
+                  type: boolean
+                  example: true
+                timeStamp: 
+                  type: string
+                  format: date-time
+                  example: 2026-07-18T06:55:12.630Z
+              required: 
+                - success
+                - timeStamp
+      "500": 
+        description: Internal server errror
+        content: 
+          application/json: 
+            schema: 
+              $ref: "../schemas/response/internalServerErrorResponse.yml#/internalServerErrorResponse"
+
+
+dbHealth: 
+  get: 
+    summary: Get database health
+    tags: 
+      - Public
+    responses: 
+      "200": 
+        description: Database running.
+        content: 
+          application/json: 
+            schema: 
+              type: object
+              properties: 
+                success:
+                  type: boolean
+                  example: true
+              required: 
+                - success
+      "500": 
+        description: Internal server errror
+        content: 
+          application/json: 
+            schema: 
+              $ref: "../schemas/response/internalServerErrorResponse.yml#/internalServerErrorResponse"
+
