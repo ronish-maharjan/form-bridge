@@ -159,3 +159,31 @@ logout:
             application/json: 
               schema: 
                 $ref: "../schemas/response/internalServerErrorResponse.yml#/internalServerErrorResponse"
+
+refreshToken:
+    post: 
+      tags: 
+        - Auth
+      summary: Refresh access token
+      responses: 
+        "204": 
+          description: Successfully refreshed the old token
+        "402":
+           description: Not authorized
+           content:
+             application/json: 
+               schema: 
+                 $ref: "../schemas/response/unauthorizedErrorResponse.yml#/unauthorizedErrorResponse"
+        "429": 
+          description: Too many request
+          content: 
+            application/json: 
+              schema: 
+                $ref: "../schemas/response/tooManyRequestErrorResponse.yml#/tooManyRequestErrorResponse"
+        "500": 
+          description: Internal server error
+          content: 
+            application/json: 
+              schema: 
+                $ref: "../schemas/response/internalServerErrorResponse.yml#/internalServerErrorResponse"
+
