@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 // main landing page route
 // currently serving basic landing page :)
 app.get("/", (req:Request, res:Response) => {
-  res.sendFile(path.join(process.cwd(), "assets", "index.html"));
+  return res.sendFile(path.join(process.cwd(), "assets", "index.html"));
 });
 
 // Main routes of our application
@@ -29,7 +29,7 @@ app.use( "/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Catch all routes
 app.all("/{*path}", (req:Request, res:Response) => {
-  res.status(404).send("404 Not Found");
+  return res.status(404).send("404 Not Found");
 });
 
 // Global Error handler
