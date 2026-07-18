@@ -1,0 +1,129 @@
+getApiKeys: 
+  get: 
+    summary: Get apikeys
+    tags: 
+      - ApiKey
+    responses:
+      "200": 
+        description: Success returning apikeys
+
+      "400":
+        description: Bad Request
+        content: 
+          application/json: 
+            schema: 
+              oneOf: 
+                - $ref: "../schemas/response/validationErrorResponse.yml#/validationErrorResponse"
+                - $ref: "../schemas/response/badRequestErrorResponse.yml#/badRequestErrorResponse"
+      "409": 
+        description: Conflict occured 
+        content: 
+          application/json: 
+            schema: 
+              $ref: "../schemas/response/conflictErrorResponse.yml#/conflictErrorResponse"
+
+      "429": 
+        description: Too many request
+        content: 
+          application/json: 
+            schema: 
+              $ref: "../schemas/response/tooManyRequestErrorResponse.yml#/tooManyRequestErrorResponse"
+
+      "500": 
+        description: Internal server errror
+        content: 
+          application/json: 
+            schema: 
+              $ref: "../schemas/response/internalServerErrorResponse.yml#/internalServerErrorResponse"
+
+createApiKey:
+  post:
+    summary: Create api Key
+    tags:
+      - ApiKey
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              url:
+                type: string
+                example: https://example.com
+            required:
+              - url
+    responses:
+      "201":
+        description: User created successfully
+      "400":
+        description: Bad Request
+        content: 
+          application/json: 
+            schema: 
+              oneOf: 
+                - $ref: "../schemas/response/validationErrorResponse.yml#/validationErrorResponse"
+                - $ref: "../schemas/response/badRequestErrorResponse.yml#/badRequestErrorResponse"
+      "409": 
+        description: Conflict occured 
+        content: 
+          application/json: 
+            schema: 
+              $ref: "../schemas/response/conflictErrorResponse.yml#/conflictErrorResponse"
+      "429": 
+        description: Too many request
+        content: 
+          application/json: 
+            schema: 
+              $ref: "../schemas/response/tooManyRequestErrorResponse.yml#/tooManyRequestErrorResponse"
+      "500": 
+        description: Internal server errror
+        content: 
+          application/json: 
+            schema: 
+              $ref: "../schemas/response/internalServerErrorResponse.yml#/internalServerErrorResponse"
+
+
+deleteApiKey:
+  delete:
+    summary: Delete apikey
+    tags:
+      - ApiKey
+
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: c2ab08b84355515
+
+    responses:
+      "201":
+        description: User created successfully
+      "400":
+        description: Bad Request
+        content: 
+          application/json: 
+            schema: 
+              oneOf: 
+                - $ref: "../schemas/response/validationErrorResponse.yml#/validationErrorResponse"
+                - $ref: "../schemas/response/badRequestErrorResponse.yml#/badRequestErrorResponse"
+      "409": 
+        description: Conflict occured 
+        content: 
+          application/json: 
+            schema: 
+              $ref: "../schemas/response/conflictErrorResponse.yml#/conflictErrorResponse"
+      "429": 
+        description: Too many request
+        content: 
+          application/json: 
+            schema: 
+              $ref: "../schemas/response/tooManyRequestErrorResponse.yml#/tooManyRequestErrorResponse"
+      "500": 
+        description: Internal server errror
+        content: 
+          application/json: 
+            schema: 
+              $ref: "../schemas/response/internalServerErrorResponse.yml#/internalServerErrorResponse"
