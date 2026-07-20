@@ -6,14 +6,16 @@
     - [x] implement /post login
     - [x] implement /apis create, delete and get
     - [x] implement edit user details email, inboxmail 
+    - [x] create proper entity with value object 
+    - [x] proper types for result, response everything 
+    - [x] implement change password functionality
+    - [x] add proper error custom code handler for db errors
+    - [x] may add like usecase return result type 
+    - [x] create datacorruption error 
 
 - todo 
-    - [] create proper entity with value object 
-    - [] proper types for result, response everything 
-    - [] implement change password functionality
-    - [] add proper error custom code handler for db errors
-    - [] may add like usecase return result type 
-    - [] create datacorruption error 
+    - [x] create a factory class for mail service
+    - [x] replace manual use of mail serviace with the factory class
 
 - learn_later
     - [] learn how env injection work in node
